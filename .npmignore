@@ -1,0 +1,8 @@
+src/
+test/
+docs/
+.gitignore
+tsconfig.json
+*.log
+*.tgz
+package-lock.json

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+docs/
+.DS_Store
+*.log
+*.tgz
+package-lock.json
