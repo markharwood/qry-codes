@@ -10,6 +10,8 @@ If you don't want to get your hands dirty, *higher-level packages* like @andorse
 
 This package is primarily designed for use by developers building equivalents of the Vue wrapper in React, Svelte etc 
 
+[![Docs](https://img.shields.io/badge/docs-latest-blue)](https://markharwood.github.io/qry-codes/)
+
 ## Installation
 
 ```bash
