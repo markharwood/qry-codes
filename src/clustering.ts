@@ -28,7 +28,6 @@ interface SimilarityGraph {
  */
 function buildSimilarityGraph(
     vectors: Uint8Array[],
-    // similarityScorer: (a: Uint8Array, b: Uint8Array) => number = computeHammingSimilarity
     similarityScorer: SimilarityScorer = computeHammingSimilarity
 ): SimilarityGraph {
     const nodeCount = vectors.length;
