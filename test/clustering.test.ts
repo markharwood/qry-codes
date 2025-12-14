@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { SimilarityGraph, buildSimilarityGraph, clusterByThreshold, oneOffClusterVectors } from "../src/clustering";
+import { SimilarityGraph, buildSimilarityGraph, clusterByThreshold, oneOffClusterVectors,getComputedSimilarity } from "../src/clustering";
 import { computeHammingSimilarity } from "../src/similarity";
 // import { mergeVectors } from "../src/merging";
 
@@ -24,6 +24,16 @@ describe("Clustering", () => {
         expect(clusters.length).to.equal(1);
         expect(clusters[0].length).to.equal(allVectors.length);
     });
+
+    it("Test getComputedSimilarity", () => {
+        // Check we can retrieve all pre-computed scores from a SimilarityGraph correctly via api
+        for(let i=0;i<allVectors.length;i++){
+            for(let j=0;j<allVectors.length;j++){
+                expect(getComputedSimilarity(fullyConnectedGraph, i, j)).to.equal(computeHammingSimilarity(allVectors[i], allVectors[j]));
+            }
+        }        
+    });
+
 
 
     it("Lowest sim = match all in one cluster", () => {
@@ -65,4 +75,5 @@ describe("Clustering", () => {
         expect(clusters.length).to.equal(allVectors.length);
     });
 
+    
 });

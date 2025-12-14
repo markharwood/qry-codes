@@ -101,4 +101,18 @@ function clusterByThreshold(graph: SimilarityGraph, threshold: number): number[]
     return clusters.sort((a, b) => b.length - a.length);
 }
 
-export {SimilarityGraph, buildSimilarityGraph, clusterByThreshold, oneOffClusterVectors}
+/**
+ * Retrieves the similarity score for a pair of vectors in the graph
+ * @param simGraph The pre-computed store of similarities between all vectors
+ * @param i Index of a vector in the graph
+ * @param j Index of another vector in the graph
+ * @returns The similarity score of the two vectors.
+ */
+function getComputedSimilarity(simGraph: SimilarityGraph, i: number, j: number): number {
+  if (i === j) return 1; 
+  const a = Math.min(i, j);
+  const b = Math.max(i, j);
+  return simGraph.edgeScores[a][b - a - 1];
+}
+
+export {SimilarityGraph, buildSimilarityGraph, clusterByThreshold, oneOffClusterVectors, getComputedSimilarity}
