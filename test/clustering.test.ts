@@ -1,5 +1,6 @@
 import { expect } from "chai";
-import { SimilarityGraph, buildSimilarityGraph, clusterByThreshold, oneOffClusterVectors,getComputedSimilarity } from "../src/clustering";
+import { SimilarityGraph, buildSimilarityGraph, clusterByThreshold, clusterWithCohesion, 
+    oneOffClusterVectors,getComputedSimilarity } from "../src/clustering";
 import { computeHammingSimilarity } from "../src/similarity";
 // import { mergeVectors } from "../src/merging";
 
@@ -74,6 +75,21 @@ describe("Clustering", () => {
         let clusters = clusterByThreshold(allZeroesGraph, 0.5)
         expect(clusters.length).to.equal(allVectors.length);
     });
+
+
+    it("Cluster with cohesion should break up non-cohesive clusters", () => {
+        // Call graph trimming should remove weak bridge
+        const bridgeSim = 3/8
+
+        // Example of overlinked cluster
+        let overlinkedClusters = clusterByThreshold(fullyConnectedGraph, bridgeSim)
+        expect(overlinkedClusters.length).to.equal(1);
+
+
+        // Example of breaking up clusters without cohesion
+        let cohesiveClusters = clusterWithCohesion(fullyConnectedGraph, bridgeSim, {minComponentSizeForPrune:allVectors.length})
+        expect(cohesiveClusters.length).to.equal(2);
+    });    
 
     
 });
